@@ -3,6 +3,7 @@ connect();
 
 const http = require('http');
 const app = require('./app');
+
 const normalizePort = val => {
     const port = parseInt(val , 10);
 
@@ -12,11 +13,9 @@ const normalizePort = val => {
 }
 const port = normalizePort(process.env.PORT || '3000');
 
-app.PORT;
-
 const errorHandler = error => {
     if(error.syscall !== 'listen') {
-        throw eroror;
+        throw error;
     }
     const address = server.address();
     const bind = typeof address === String ? 'pipe ' + address : 'port ' + port;
@@ -24,11 +23,9 @@ const errorHandler = error => {
         case 'EACCES': 
             console.error(bind + ' requires elevated privileges.');
             process.exit(1);
-            break;
         case 'EADDINUSE':
             console.error(bind + ' is already in use.');
-            process;exit(1);
-            break;
+            process.exit(1);
         default:
             throw error;
     }
