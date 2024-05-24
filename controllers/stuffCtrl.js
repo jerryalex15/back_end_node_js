@@ -15,9 +15,8 @@ const fs = require('fs');
 //         .catch(error => res.status(400).json({ error }));
 // }
 exports.createThing =  ( req ,res , next ) => {
-    
-    const thingObject = JSON.parse(req.body.thing);
-    delete thingObject._id;
+
+    const thingObject = req.body;
     const thing = new Thing({
         ...thingObject,
         imageUrl:`${req.protocol}://${req.get('host')}/images/${req.file.filename}`

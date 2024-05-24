@@ -1,14 +1,15 @@
 const multer = require('multer');
+const path = require('path')
 
 const MIME_TYPES = {
     'image/jpg': 'jpg',
-    'image/jpeg': 'jpg',
+    'image/jpeg': 'jpeg',
     'image/png': 'png'
 };
 
 const storage = multer.diskStorage({
     destination: (req , res , callback) => {
-        callback(null , 'images');
+        callback(null , path.resolve("images"));
     },
     filename: (req , file , callback) => {
         const name = file.originalname.split(' ').join('_');
@@ -17,4 +18,4 @@ const storage = multer.diskStorage({
     }
 });
 
-module.exports = multer({storage:storage});
+module.exports = multer({storage:storage}).single('imageUrl');
